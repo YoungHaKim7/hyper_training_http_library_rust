@@ -12,6 +12,13 @@ use tokiort::TokioIo;
 // A simple type alias so as to DRY.
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 
+#[derive(Deserialize, Debug)]
+struct User {
+    id: i32,
+    #[allow(unused)]
+    name: String,
+}
+
 async fn fetch_json(url: hyper::Uri) -> Result<Vec<User>> {
     let host = url.host().expect("uri has no host");
     let port = url.port_u16().unwrap_or(80);
@@ -44,13 +51,6 @@ async fn fetch_json(url: hyper::Uri) -> Result<Vec<User>> {
     let users = serde_json::from_reader(body.reader())?;
 
     Ok(users)
-}
-
-#[derive(Deserialize, Debug)]
-struct User {
-    id: i32,
-    #[allow(unused)]
-    name: String,
 }
 
 #[tokio::main]
