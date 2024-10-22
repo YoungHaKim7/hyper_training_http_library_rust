@@ -13,6 +13,7 @@
 
 - https://github.com/hyperium/hyper
 - https://crates.io/crates/hyper
+  - Get started by looking over the [guides](https://hyper.rs/guides/1/).
 
 - A protective and efficient HTTP library for all.
 
